@@ -172,14 +172,13 @@
 		var Particle = function(position, k, p, c, o, f, g, s, sn, count, link, title) {
 			this.acceleration = new THREE.Vector3(Math.random() * 10 - 5, Math.random() * 10 - 5, 0);
 			this.velocity = new THREE.Vector3(Math.random() - .5, Math.random() - .5, 0);
-			this.lifespan = 1500.0; //how many frames they will move for 
+			this.lifespan = 15000.0; //how many frames they will move for 
 
-			this.r = 12;
+			this.r = 10; //Circle radius
 			this.maxspeed = 3; // Maximum speed
 			this.maxforce = 0.3; // Maximum steering force
 
-			// throw the dice to simulate a specific species from the db
-			// this.species = count; // adjust scale based on shuffle
+			//selecting species color 
 			if (count == 0) {
 				this.species = 0x4B4E6A;
 			}
@@ -206,9 +205,8 @@
 			}
 
 
-			geometry = new THREE.CircleBufferGeometry(this.r); // parameter represents scale
+			geometry = new THREE.CircleBufferGeometry(this.r, 20); // parameter represents scale
 			// create object with basic material and color based on random species shuffled earlier
-			// color is made up on arbitrary number based on species code
 			this.object = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
 				color: this.species,
 				wireframe: false
@@ -249,7 +247,12 @@
 
 				// if (this.object.natureCount == 0) {
 				// 	//sets where particles will move 
-				var seekForce = this.seek(new THREE.Vector3(scale((window.innerWidth / 2 + window.innerWidth / 8) * -1, window.innerWidth / 2 + window.innerWidth / 8, this.object.natureCount, maxNatureCount), (window.innerHeight / 2) - (window.innerHeight / 3) , 0));
+				var seekForce = this.seek(
+					new THREE.Vector3(
+						scale((window.innerWidth / 2 + window.innerWidth / 15) * -1, window.innerWidth / 2 + window.innerWidth / 15, this.object.natureCount, maxNatureCount), 
+						(window.innerHeight / 2) - (window.innerHeight / 3) , 
+						0)
+					);
 
 
 
@@ -375,14 +378,14 @@
 			camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000);
 			camera.position.z = 1000;
 
-			controls = new THREE.TrackballControls(camera);
-			controls.rotateSpeed = 1.0;
-			controls.zoomSpeed = 1.2;
-			controls.panSpeed = 0.8;
-			controls.noZoom = false;
-			controls.noPan = false;
-			controls.staticMoving = true;
-			controls.dynamicDampingFactor = 0.3;
+			// controls = new THREE.TrackballControls(camera);
+			// controls.rotateSpeed = 1.0;
+			// controls.zoomSpeed = 1.2;
+			// controls.panSpeed = 0.8;
+			// controls.noZoom = false;
+			// controls.noPan = false;
+			// controls.staticMoving = true;
+			// controls.dynamicDampingFactor = 0.3;
 
 			scene = new THREE.Scene();
 
@@ -403,9 +406,11 @@
 
 			scene.add(light);
 
-			// var geometry = new THREE.BoxGeometry( 40, 40, 40 );
-			drawLine ((window.innerWidth / 2 + window.innerWidth / 8) * -1, window.innerHeight / 2.5 * -1, 0, window.innerWidth / 2 + window.innerWidth / 8,  window.innerHeight / 2.5 * -1, 0, 1,3
-				)
+			//SCALE LINE BELOW
+			// drawLine ((window.innerWidth / 2 + window.innerWidth / 8) * -1, window.innerHeight / 2.5 * -1, 0, window.innerWidth / 2 + window.innerWidth / 8,  window.innerHeight / 2.5 * -1, 0, 1,3
+			// 	)
+
+
 			ps = new ParticleSystem(new THREE.Vector3(0, 0, 0));
 
 			plane = new THREE.Mesh(
@@ -442,16 +447,6 @@
 
 			window.addEventListener('resize', onWindowResize, false);
 
-			// WHERE I ATTEMPTED TO MAKE A LINE
-			// var Linematerial = new THREE.LineBasicMaterial({
-			// 	color: 0xffffff
-			// });
-			// var lines = new THREE.Geometry();
-			// lines.vertices.push(new THREE.Vector3((window.innerWidth / 2 + window.innerWidth / 5) * -1, window.innerHeight/2 * -1, 0));
-			// lines.vertices.push(new THREE.Vector3(window.innerWidth / 4, window.innerHeight/2 * -1, 0));
-			// var line = new THREE.Line(lines, Linematerial);
-			// scene.add(line);
-			// initial selection
 			selection();
 		}
 
@@ -590,7 +585,7 @@
 			// if we found intersection objects
 			if (intersects.length > 0) {
 
-				controls.enabled = false;
+				// controls.enabled = false;
 
 				SELECTED = intersects[0].object;
 
@@ -616,7 +611,7 @@
 
 			event.preventDefault();
 
-			controls.enabled = true;
+			// controls.enabled = true;
 
 			if (INTERSECTED) {
 
@@ -793,7 +788,7 @@
 
 		function render() {
 
-			controls.update();
+			// controls.update();
 
 			renderer.setClearColor(new THREE.Color(0x010C13), 1);
 			renderer.render(scene, camera);
