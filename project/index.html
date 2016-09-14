@@ -8,7 +8,7 @@
 	<style>
 		body {
 			font-family: Monospace;
-			background-color: #010C13;
+			background-color: #1E1E1E;
 			margin: 0px;
 			overflow: hidden;
 		}
@@ -83,21 +83,9 @@
 	</div>
 
 	<div id="below">
-		<div id="otherInfo">
-			<div id="heirarchy">Taxonomy</div>
-			<div id="info">
-				<!--<p id="kingdom"> </p>-->
-				<!--<p id="phylum"> </p>-->
-				<!--<p id="class"> </p>-->
-				<p id="order"> </p>
-				<p id="family"> </p>
-				<p id="genus"> </p>
-				<p id="species"> </p>
-			</div>
-		</div>
-		<!--<div id="search"></div>-->
+
 		<div id="pubBox">
-			<div id="nature">Publications</div>
+			<div id="nature">Select a Species</div>
 			<div id="currentPublications"></div>
 		</div>
 	</div>
@@ -512,10 +500,10 @@
 					// document.getElementById("kingdom").innerHTML = "<b>KINGDOM</b><br>" + "Animalia";
 					// document.getElementById("phylum").innerHTML = "<b>PHYLUM</b><br>" + "Cnidaria";
 					// document.getElementById("class").innerHTML = "<b>CLASS</b><br>" + INTERSECTED.class;
-					document.getElementById("order").innerHTML = "<b>ORDER</b><br>" + INTERSECTED.order;
-					document.getElementById("family").innerHTML = "<b>FAMILY</b><br>" + INTERSECTED.family;
-					document.getElementById("genus").innerHTML = "<b>GENUS</b><br>" + INTERSECTED.genus;
-					document.getElementById("species").innerHTML = "<b>SPECIES</b><br>" + INTERSECTED.species;
+					// document.getElementById("order").innerHTML = "<b>ORDER</b><br>" + INTERSECTED.order;
+					// document.getElementById("family").innerHTML = "<b>FAMILY</b><br>" + INTERSECTED.family;
+					// document.getElementById("genus").innerHTML = "<b>GENUS</b><br>" + INTERSECTED.genus;
+					// document.getElementById("species").innerHTML = "<b>SPECIES</b><br>" + INTERSECTED.species;
 					// }
 
 					//DO I NEED THIS?? removes the groups labeled "current"
@@ -529,22 +517,23 @@
 					if (INTERSECTED.natureCount > 0) {
 
 						// container for assembling publications, unsorted list
-						var publicationString = "<ul>\n";
+						var publicationString = "";
 						for (var a = 0; a < INTERSECTED.natureArticles.length; a++) {
-							document.getElementById("nature").innerHTML = "Number of citations: " + INTERSECTED.natureCount;
+							document.getElementById("nature").innerHTML = INTERSECTED.genus + " " +INTERSECTED.species + " is mentioned in " + INTERSECTED.natureCount + " articles";
 							// assemble html formatted string, list items li 
-							publicationString += "<li href='" + INTERSECTED.natureArticles[a] + "'>" + INTERSECTED.natureTitles[a] + "</li>\n";
+							publicationString += "<p href='" + INTERSECTED.natureArticles[a] + "'>" + INTERSECTED.natureTitles[a] + "</p>\n";
 							// document.getElementById("nature").insertAdjacentHTML('afterend', '<div id=' + "current" + ' href=' + INTERSECTED.natureArticles[a] + '>' + INTERSECTED.natureTitles[a] + '</div>');
 						}
 						// finish off unsorted list
-						publicationString += "</ul>\n";
+						// publicationString += "</ul>\n";
 						// document.getElementById("nature").appendChild(publicationString);
 						// write string to html element, currently line 48
 						// console.log(publicationString);
 						document.getElementById("currentPublications").innerHTML = publicationString;
 					}
 					else {
-						document.getElementById("nature").innerHTML = "";
+						document.getElementById("nature").innerHTML = "Number of citations: " + INTERSECTED.natureCount;
+						document.getElementById("currentPublications").innerHTML = "";
 					}
 
 					plane.position.copy(INTERSECTED.position);
@@ -790,7 +779,7 @@
 
 			// controls.update();
 
-			renderer.setClearColor(new THREE.Color(0x010C13), 1);
+			renderer.setClearColor(new THREE.Color(0x1E1E1E), 1);
 			renderer.render(scene, camera);
 
 		}
@@ -813,6 +802,13 @@
 			selection(choice);
 			closeNav();
 		});
+
+
+
+
+
+
+
 
 		function scale(windowMin, windowMax, x, m) {
 			var a = windowMin;
