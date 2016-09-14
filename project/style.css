@@ -218,6 +218,13 @@ li {
     letter-spacing: .028em;
 }
 
+#canvas {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    height: 30%;
+}
+
 #otherInfo {
     /*font-weight: bold;*/
     /*font-size: 1.3em;*/
