@@ -85,7 +85,7 @@
 	<div id="below">
 		<div id="pubBox">
 			<div id="nature">Select a Species</div>
-			<canvas id="canvas"></canvas>
+			<canvas id="canvas" height="30%" width="100%"></canvas>
 			<div id="currentPublications"></div>
 		</div>
 	</div>
@@ -107,7 +107,12 @@
 
 		// levels available
 		var hierarchy = ["kingdom", "phylum", "class", "order", "family", "genus", "species", "sciName"];
-		var orders = ["Actiniaria", "Alcyonacea", "Antipatharia", "Ceriantharia", "Corallimorpharia", "Heliolitina", "Helioporacea", "Pennatulacea", "Scleractinia", "Zoantharia", "Chirodropida", "Cubomedusae", "Actinulida", "Anthoathecata", "Leptothecata", "Limnomedusae", "Narcomedusae", "Siphonophorae", "Trachymedusae", "Coronatae", "Rhizostomeae", "Semaeostomeae", "Stauromedusae"];
+		// var orders = ["Actiniaria", "Alcyonacea", "Antipatharia", "Ceriantharia", "Corallimorpharia", "Heliolitina", "Helioporacea", "Pennatulacea", "Scleractinia", "Zoantharia", "Chirodropida", "Cubomedusae", "Actinulida", "Anthoathecata", "Leptothecata", "Limnomedusae", "Narcomedusae", "Siphonophorae", "Trachymedusae", "Coronatae", "Rhizostomeae", "Semaeostomeae", "Stauromedusae"];
+
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		resizeCanvas();
+
 
 		var ParticleSystem = function(position) {
 			this.origin = new THREE.Vector3(0, 0, 0);
@@ -518,10 +523,17 @@
 
 						// container for assembling publications, unsorted list
 						var publicationString = "";
+						ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 						for (var a = 0; a < INTERSECTED.natureArticles.length; a++) {
+							ctx.fillStyle = "rgb(200,0,0)";
+        					ctx.fillRect (8 * a + canvas.width/2 , 10, 4, 30);
+
 							document.getElementById("nature").innerHTML = INTERSECTED.genus + " " +INTERSECTED.species + " is mentioned in " + INTERSECTED.natureCount + " articles";
 							// assemble html formatted string, list items li 
 							publicationString += "<p href='" + INTERSECTED.natureArticles[a] + "'>" + INTERSECTED.natureTitles[a] + "</p>\n";
+
+
 							// document.getElementById("nature").insertAdjacentHTML('afterend', '<div id=' + "current" + ' href=' + INTERSECTED.natureArticles[a] + '>' + INTERSECTED.natureTitles[a] + '</div>');
 						}
 						// finish off unsorted list
@@ -534,6 +546,7 @@
 					else {
 						document.getElementById("nature").innerHTML = "Number of citations: " + INTERSECTED.natureCount;
 						document.getElementById("currentPublications").innerHTML = "";
+						ctx.clearRect(0, 0, canvas.width, canvas.height);
 					}
 
 					plane.position.copy(INTERSECTED.position);
@@ -806,7 +819,10 @@
 
 
 
-
+		function resizeCanvas() {
+			canvas.width = window.innerWidth;
+    		canvas.height = (window.innerHeight * 0.09);
+		}
 
 
 
