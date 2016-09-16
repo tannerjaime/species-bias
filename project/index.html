@@ -20,7 +20,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<script src="three.min.js"></script>
-	<script src="TrackballControls.js"></script>
+	<!--<script src="TrackballControls.js"></script>-->
 	<script src="stats.min.js"></script>
 	<script src="Cnidaria.json"></script>
 
@@ -76,12 +76,16 @@
 
 	<!-- Use any element to open/show the overlay navigation menu -->
 	<div id="topBar">
-			<div id="title">
+		<div id="openAbout">
+			<p id="about">
+				<br> <b> ABOUT </b></p>
 		</div>
-		<!-- <div id="openNav" onclick="openNav()">
+		<div id="title">
+		</div>
+		<div id="openNav" onclick="openNav()">
 			<p id="exploreOrders">EXPLORE OTHER
-				<br> <b> ORGANISMS </b></span>
-		</div> -->
+				<br> <b> ORGANISMS </b></p>
+		</div>
 	</div>
 
 	<div id="below">
@@ -245,10 +249,10 @@
 				// 	//sets where particles will move 
 				var seekForce = this.seek(
 					new THREE.Vector3(
-						scale((window.innerWidth / 2 + window.innerWidth / 15) * -1, window.innerWidth / 2 + window.innerWidth / 15, this.object.natureCount, maxNatureCount), 
-						(window.innerHeight / 2) - (window.innerHeight / 3) , 
+						scale((window.innerWidth / 2 + window.innerWidth / 15) * -1, window.innerWidth / 2 + window.innerWidth / 15, this.object.natureCount, maxNatureCount),
+						(window.innerHeight / 2) - (window.innerHeight / 3),
 						0)
-					);
+				);
 
 
 
@@ -530,9 +534,9 @@
 
 						for (var a = 0; a < INTERSECTED.natureArticles.length; a++) {
 							ctx.fillStyle = "rgb(200,0,0)";
-        					ctx.fillRect (10 * a + canvas.width/2 , 10, 4, 30);
+							ctx.fillRect(10 * a + canvas.width / 2, 10, 4, 30);
 
-							document.getElementById("nature").innerHTML = INTERSECTED.genus + " " +INTERSECTED.species + " is mentioned in " + INTERSECTED.natureCount + " articles";
+							document.getElementById("nature").innerHTML = INTERSECTED.genus + " " + INTERSECTED.species + " is mentioned in " + INTERSECTED.natureCount + " articles";
 							// assemble html formatted string, list items li 
 							publicationString += "<p href='" + INTERSECTED.natureArticles[a] + "'>" + INTERSECTED.natureTitles[a] + "</p>\n";
 
@@ -687,12 +691,13 @@
 						if (groupSum[cnidaria[i].natureCount] == undefined) {
 							groupSum[0] = 0;
 							group[0] = 0
-					
+
 							group[cnidaria[i].natureCount] = cnidaria[i].natureCount;
 							// groupSum[cnidaria[i].natureCount] = 0;
 							groupSum[cnidaria[i].natureCount] = cnidaria[i].natureCount;
-					console.log("test");
-						} else if (groupSum[cnidaria[i].natureCount] != undefined) {
+							console.log("test");
+						}
+						else if (groupSum[cnidaria[i].natureCount] != undefined) {
 							groupSum[cnidaria[i].natureCount] += cnidaria[i].natureCount;
 						}
 					}
@@ -719,7 +724,7 @@
 			var bottomBar = "<div>\n";
 			for (var a = 0; a < group.length; a++) {
 				// assemble html formatted string, list items 
-				
+
 				var left = scale((window.innerWidth / 2 + window.innerWidth / 8) * -1, window.innerWidth / 2 + window.innerWidth / 8, a, maxNatureCount);
 				// if (group[a] != undefined) {
 				console.log(window.innerWidth);
@@ -730,13 +735,13 @@
 				// }
 				bottomBar += "<span style='" + "position:absolute;left:" + left + "px;" + "'>" + group[a] + "</span>";
 				// }
-					
+
 			}
 
 			bottomBar += "</div>\n";
 
 			document.getElementById("pageRunner").innerHTML = bottomBar;
-			
+
 
 
 			if (chosen.length > 0) {
@@ -758,9 +763,9 @@
 						link = "NaN";
 						title = "NaN";
 					}
-					
+
 					ps.addParticle(chosen[i].classification.kingdom, chosen[i].classification.phylum, chosen[i].classification.class, chosen[i].classification.order, chosen[i].classification.family, chosen[i].classification.genus, chosen[i].species, chosen[i].sciName, chosen[i].natureCount, link, title);
-					
+
 				}
 			}
 
@@ -770,26 +775,26 @@
 		}
 
 
-		function drawLine (beginX, beginY, beginZ, endX, endY, endZ, alpha, weight) {
-				var material = new THREE.LineBasicMaterial({
+		function drawLine(beginX, beginY, beginZ, endX, endY, endZ, alpha, weight) {
+			var material = new THREE.LineBasicMaterial({
 				color: 0xefc954,
 				linewidth: weight,
 				opacity: alpha
-				});
-				var geometry = new THREE.Geometry();
-				geometry.vertices.push(
-				new THREE.Vector3( beginX, beginY, beginZ ),
-				new THREE.Vector3( endX, endY, endZ )
+			});
+			var geometry = new THREE.Geometry();
+			geometry.vertices.push(
+				new THREE.Vector3(beginX, beginY, beginZ),
+				new THREE.Vector3(endX, endY, endZ)
 				// new THREE.Vector3( all[4].position.x,  all[4].position.y,  all[4].position.z ),
 				// new THREE.Vector3( all[8].position.x,  all[8].position.y,  all[8].position.z )
 				// new THREE.Vector3( 10, 0, 0 )
-				);
-				var line = new THREE.Line( geometry, material );
-				// console.log(line);
-				// linesArray.push(line);
-				// console.log(linesArray.length);
-				scene.add( line );
-			}
+			);
+			var line = new THREE.Line(geometry, material);
+			// console.log(line);
+			// linesArray.push(line);
+			// console.log(linesArray.length);
+			scene.add(line);
+		}
 
 		function render() {
 
@@ -824,7 +829,7 @@
 
 		function resizeCanvas() {
 			canvas.width = window.innerWidth;
-    		canvas.height = (window.innerHeight * 0.09);
+			canvas.height = (window.innerHeight * 0.09);
 		}
 
 
