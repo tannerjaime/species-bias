@@ -27,8 +27,7 @@
 
 	<div id="mycanvas"></div>
 
-	<div id="title">
-		</div>
+
 
 	<div id="myNav" class="overlay">
 
@@ -76,11 +75,13 @@
 	</div>
 
 	<!-- Use any element to open/show the overlay navigation menu -->
-	<div id="rightBar">
-		<div id="openNav" onclick="openNav()">
+	<div id="topBar">
+			<div id="title">
+		</div>
+		<!-- <div id="openNav" onclick="openNav()">
 			<p id="exploreOrders">EXPLORE OTHER
 				<br> <b> ORGANISMS </b></span>
-		</div>
+		</div> -->
 	</div>
 
 	<div id="below">
@@ -116,6 +117,7 @@
 
 
 		var ParticleSystem = function(position) {
+
 			this.origin = new THREE.Vector3(0, 0, 0);
 			this.particles = [];
 
@@ -669,11 +671,11 @@
 				// console.log("level no: " + currentLevel + " | thisLevel: " + thisLevel + " | thisLevel Obj: " + obj[thisLevel]);
 				// sel = obj[thisLevel];
 				sel = order;
-				document.getElementById("title").innerHTML = "<a>Mentions of <b>" + sel + "</b><br> in the Publication <i>Nature</i></a>";
+				document.getElementById("title").innerHTML = "<a>Mentions of <b>" + sel + "</b> in the Publication <i>Nature</i></a>";
 			}
 			else {
 				sel = 'Stauromedusae';
-				document.getElementById("title").innerHTML = "<a>Mentions of <b>" + sel + "</b><br> in the Publication <i>Nature</i></a>";
+				document.getElementById("title").innerHTML = "<a>Mentions of <b>" + sel + "</b> in the Publication <i>Nature</i></a>";
 			}
 
 			// console.log(selected.length);
