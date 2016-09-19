@@ -200,13 +200,48 @@ li {
     color: #E1EBF1;
     background-color: #030303;
 }
+#leftOptions {
+    position: absolute;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    width: 15%;
+    /*visibility: hidden;*/
+    color: #E1EBF1;
+    background-color: #030303;
+    text-align: center;
+
+}
+
+#speciesInfo {
+    height: 25%;
+    top: 0%;
+    border: 0.5px solid #f0f0f0;
+    line-height: 25%;
+}
+
+#allSpecies {
+    height: 25%;
+    top: 25%;
+}
+
+#articles {
+    height: 25%;
+    top: 50%;
+}
+
+#articleDetails {
+    height: 25%;
+    top: 75%;
+}
+
 
 #pubBox {
     position: absolute;
     height: 100%;
     top: 0%;
-    left: 0%;
-    width: 100%;
+    left: 15%;
+    width: 85%;
     /*visibility: hidden;*/
     color: #E1EBF1;
     background-color: #030303;
